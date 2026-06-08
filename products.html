@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | H.R Super Market</title>
+    <meta
+      name="description"
+      content="Browse H.R Super Market products by category, search items, place home delivery or pickup orders, and view active discounts."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="products">
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html" aria-label="H.R Super Market home">
+          <img class="brand-logo" src="./logo.svg" alt="HR logo" />
+          <span>
+            <strong>H.R Super Market</strong>
+            <small>Surendranagar, Gujarat</small>
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="./index.html">Home</a>
+          <a href="./products.html">Products</a>
+          <a href="./admin.html" data-admin-link hidden>Admin</a>
+        </nav>
+        <div class="topbar-actions">
+          <button class="button button-secondary" type="button" data-open-cart>
+            Cart <span data-cart-count-inline>0</span>
+          </button>
+          <button class="button button-primary" type="button" data-auth-toggle>Sign in</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="page-hero commerce-hero">
+          <div>
+            <p class="eyebrow">Shopping</p>
+            <h1>Fast grocery shopping with delivery and pickup.</h1>
+            <p class="muted">
+              Search by category, add items to cart, choose delivery or pickup, and place orders in one flow.
+            </p>
+          </div>
+          <div class="commerce-hero-actions">
+            <button class="button button-primary" type="button" data-open-cart>Open cart</button>
+            <button class="button button-secondary" type="button" data-request-location>
+              Use my location
+            </button>
+          </div>
+        </section>
+
+        <section class="page-panel shopping-tabs-panel">
+          <div class="shopping-tabs" aria-label="Shopping tabs">
+            <button class="shopping-tab is-active" type="button" data-service-tab="catalog">All items</button>
+            <button class="shopping-tab" type="button" data-service-tab="delivery">Home delivery</button>
+            <button class="shopping-tab" type="button" data-service-tab="pickup">Store pickup</button>
+            <button class="shopping-tab" type="button" data-service-tab="offers">Special offers</button>
+            <button class="shopping-tab" type="button" data-service-tab="orders">My orders</button>
+            <button class="shopping-tab" type="button" data-service-tab="account">Account</button>
+          </div>
+        </section>
+
+        <section class="page-panel commerce-summary-grid">
+          <article class="commerce-summary-card">
+            <p class="eyebrow">Delivery</p>
+            <h3 data-delivery-summary-title>Home delivery available</h3>
+            <p class="muted" data-delivery-summary-copy>
+              Delivery settings are loading.
+            </p>
+          </article>
+          <article class="commerce-summary-card">
+            <p class="eyebrow">Pickup</p>
+            <h3 data-pickup-summary-title>Express pickup</h3>
+            <p class="muted" data-pickup-summary-copy>
+              Pickup settings are loading.
+            </p>
+          </article>
+          <article class="commerce-summary-card">
+            <p class="eyebrow">Payments</p>
+            <h3>UPI, COD, and counter payment</h3>
+            <p class="muted">
+              Sign in first to place orders and track them from your account.
+            </p>
+          </article>
+        </section>
+
+        <section class="page-panel" data-products-offer-banner hidden>
+          <div class="section-heading section-heading-split">
+            <div>
+              <p class="eyebrow">Offer view</p>
+              <h2>Showing products with active offers.</h2>
+            </div>
+            <a class="button button-secondary" href="./products.html">Show all products</a>
+          </div>
+        </section>
+
+        <section class="catalog-layout">
+          <section class="catalog-main">
+            <section class="page-panel" id="catalog">
+              <div class="toolbar-row">
+                <div class="search-box commerce-search-box">
+                  <input
+                    class="toolbar-input"
+                    type="search"
+                    placeholder="Search products, brands, and categories"
+                    data-product-search
+                    autocomplete="off"
+                  />
+                  <div class="search-suggestions" data-search-suggestions hidden></div>
+                </div>
+                <div class="category-chips" data-product-category-filters></div>
+              </div>
+            </section>
+
+            <section class="page-panel">
+              <div class="section-heading section-heading-split">
+                <div>
+                  <p class="eyebrow">Quick reorder</p>
+                  <h2>Order again in one tap.</h2>
+                </div>
+              </div>
+              <div class="product-grid" data-reorder-products></div>
+            </section>
+
+            <section class="page-panel">
+              <div class="section-heading section-heading-split">
+                <div>
+                  <p class="eyebrow">Catalog</p>
+                  <h2>All products</h2>
+                </div>
+              </div>
+              <div class="product-grid" data-all-products></div>
+              <div class="empty-state" data-products-empty hidden>
+                <h3>No products found</h3>
+                <p class="muted">Try another search or add products from the admin dashboard.</p>
+              </div>
+            </section>
+          </section>
+
+          <aside class="catalog-sidebar">
+            <section class="page-panel cart-panel" data-cart-panel>
+              <div class="section-heading section-heading-split">
+                <div>
+                  <p class="eyebrow">Your cart</p>
+                  <h2><span data-cart-count>0</span> items selected</h2>
+                </div>
+                <strong data-cart-total>Rs 0</strong>
+              </div>
+              <div class="cart-list" data-cart-items></div>
+              <div class="empty-state" data-cart-empty>
+                <h3>Cart is empty</h3>
+                <p class="muted">Add products to start your order.</p>
+              </div>
+            </section>
+
+            <section class="page-panel checkout-panel" id="delivery-pickup">
+              <div class="section-heading">
+                <p class="eyebrow">Checkout</p>
+                <h2>Delivery or pickup</h2>
+              </div>
+              <form class="admin-form" data-checkout-form>
+                <div class="category-chips checkout-mode-chips">
+                  <button class="category-chip is-active" type="button" data-checkout-mode="delivery">
+                    Home delivery
+                  </button>
+                  <button class="category-chip" type="button" data-checkout-mode="pickup">
+                    Pickup
+                  </button>
+                </div>
+                <div class="checkout-note" data-signin-required-note>
+                  Sign in before placing an order.
+                </div>
+                <div class="checkout-location-box" data-checkout-location-box>
+                  <div class="review-form-actions">
+                    <button class="button button-secondary button-full" type="button" data-request-location>
+                      Detect location
+                    </button>
+                    <button class="button button-secondary button-full" type="button" data-fill-store-address>
+                      Use store address
+                    </button>
+                  </div>
+                  <p class="muted" data-location-status>
+                    We use your location to check delivery radius and charges.
+                  </p>
+                </div>
+                <label>
+                  <span>Full name</span>
+                  <input type="text" name="customerName" maxlength="50" required />
+                </label>
+                <label>
+                  <span>Phone number</span>
+                  <input type="tel" name="phone" maxlength="15" required />
+                </label>
+                <label data-delivery-address-field>
+                  <span>Delivery address</span>
+                  <textarea name="address" rows="3" maxlength="180"></textarea>
+                </label>
+                <div class="form-row">
+                  <label>
+                    <span>Schedule</span>
+                    <select name="slot">
+                      <option value="asap">As soon as possible</option>
+                      <option value="morning">9 AM - 11 AM</option>
+                      <option value="afternoon">11 AM - 2 PM</option>
+                      <option value="evening">5 PM - 8 PM</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Payment</span>
+                    <select name="paymentMethod">
+                      <option value="upi">UPI pay now</option>
+                      <option value="cod">Cash on delivery</option>
+                      <option value="pickup-pay">Pay at pickup</option>
+                      <option value="counter-card">Card at counter</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  <span>Order note</span>
+                  <textarea name="note" rows="2" maxlength="120" placeholder="Gate number, landmark, or special note"></textarea>
+                </label>
+                <div class="checkout-pricing" data-checkout-summary></div>
+                <button class="button button-primary button-full" type="submit">Place order</button>
+              </form>
+            </section>
+
+            <section class="page-panel" id="my-orders">
+              <div class="section-heading">
+                <p class="eyebrow">Order tracking</p>
+                <h2>Your recent orders</h2>
+              </div>
+              <div class="reviews-grid" data-customer-orders></div>
+            </section>
+
+            <section class="page-panel" id="account">
+              <div class="section-heading">
+                <p class="eyebrow">Account</p>
+                <h2>Your profile</h2>
+              </div>
+              <div class="reviews-grid" data-account-panel></div>
+            </section>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" data-modal hidden>
+      <section class="auth-modal" aria-labelledby="auth-title" aria-modal="true" role="dialog">
+        <button class="modal-close" data-close-auth="true" aria-label="Close sign in dialog">
+          &times;
+        </button>
+        <p class="eyebrow">Account access</p>
+        <h2 id="auth-title">Sign in or create your account</h2>
+        <p class="muted">Use Google or email to continue.</p>
+        <div class="auth-actions">
+          <button class="button button-google" type="button" data-google-signin>
+            Continue with Google
+          </button>
+        </div>
+        <div class="auth-divider"><span>or</span></div>
+        <div class="auth-mode-switch">
+          <button class="auth-mode-button is-active" type="button" data-auth-mode="signin">
+            Sign in
+          </button>
+          <button class="auth-mode-button" type="button" data-auth-mode="signup">
+            Sign up
+          </button>
+        </div>
+        <form class="auth-form" data-auth-form>
+          <label>
+            <span>Name</span>
+            <input type="text" name="displayName" placeholder="Your name" data-signup-only />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" minlength="6" required />
+          </label>
+          <button class="button button-primary button-full" type="submit" data-auth-submit>
+            Sign in
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" data-toast hidden></div>
+
+    <div class="mobile-contact-bar" aria-label="Quick mobile contact">
+      <a class="mobile-contact-link mobile-contact-call" href="tel:09054127011">Call</a>
+      <a
+        class="mobile-contact-link mobile-contact-whatsapp"
+        href="https://wa.me/919054127011"
+        target="_blank"
+        rel="noreferrer"
+        >WhatsApp</a
+      >
+      <a
+        class="mobile-contact-link mobile-contact-map"
+        href="https://www.google.com/maps/search/?api=1&query=H.R+Super+Market+Surendranagar"
+        target="_blank"
+        rel="noreferrer"
+        >Directions</a
+      >
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

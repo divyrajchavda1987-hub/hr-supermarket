@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | H.R Super Market</title>
+    <meta
+      name="description"
+      content="Admin dashboard for H.R Super Market offers, delivery settings, products, and orders."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="admin">
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html" aria-label="H.R Super Market home">
+          <img class="brand-logo" src="./logo.svg" alt="HR logo" />
+          <span>
+            <strong>H.R Super Market</strong>
+            <small>Surendranagar, Gujarat</small>
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="./index.html">Home</a>
+          <a href="./products.html">Products</a>
+          <a href="./admin.html" data-admin-link hidden>Admin</a>
+        </nav>
+        <div class="topbar-actions">
+          <button class="button button-primary" type="button" data-auth-toggle>Sign in</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="page-hero">
+          <p class="eyebrow">Admin dashboard</p>
+          <h1>Manage products, delivery, and live orders.</h1>
+          <p class="muted">
+            Only approved admin accounts can open this dashboard and update store operations.
+          </p>
+        </section>
+
+        <section class="page-panel" data-admin-gate hidden>
+          <h2>Admin access required</h2>
+          <p class="muted" data-admin-gate-message>
+            Sign in with the admin account to open this dashboard.
+          </p>
+          <button class="button button-primary" type="button" data-open-auth="true">
+            Sign in as admin
+          </button>
+        </section>
+
+        <section class="page-two-column" data-admin-content hidden>
+          <section>
+            <article class="admin-form-card">
+              <p class="eyebrow">Status</p>
+              <h3>Admin access</h3>
+              <p class="muted" data-admin-status>
+                Sign in with an allowed admin email to start managing the store.
+              </p>
+            </article>
+
+            <article class="admin-form-card">
+              <p class="eyebrow">Visitors</p>
+              <h3>Store traffic overview</h3>
+              <div class="product-grid admin-stats-grid">
+                <article class="product-card">
+                  <h3 data-admin-visits-total>0</h3>
+                  <p class="muted">Total visitors</p>
+                </article>
+                <article class="product-card">
+                  <h3 data-admin-visits-today>0</h3>
+                  <p class="muted">Today</p>
+                </article>
+                <article class="product-card">
+                  <h3 data-admin-visits-yesterday>0</h3>
+                  <p class="muted">Yesterday</p>
+                </article>
+                <article class="product-card">
+                  <h3 data-admin-visits-month>0</h3>
+                  <p class="muted">This month</p>
+                </article>
+                <article class="product-card">
+                  <h3 data-admin-visits-year>0</h3>
+                  <p class="muted">This year</p>
+                </article>
+              </div>
+            </article>
+
+            <article class="admin-form-card">
+              <p class="eyebrow">Offer banner</p>
+              <h3>Create a homepage offer</h3>
+              <form class="admin-form" data-offer-form>
+                <label>
+                  <span>Display type</span>
+                  <select name="displayType" required>
+                    <option value="banner">Banner</option>
+                    <option value="special">Special offer banner</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Offer title</span>
+                  <input type="text" name="title" maxlength="70" required />
+                </label>
+                <label>
+                  <span>Offer description</span>
+                  <textarea name="description" rows="3" maxlength="180" required></textarea>
+                </label>
+                <label>
+                  <span>Offer ends at (optional)</span>
+                  <input type="datetime-local" name="expiresAt" />
+                </label>
+                <button class="button button-primary button-full" type="submit">
+                  Add Offer
+                </button>
+              </form>
+            </article>
+
+            <article class="admin-form-card">
+              <p class="eyebrow">Product offers</p>
+              <h3>Put an existing product in special offer</h3>
+              <form class="admin-form" data-product-offer-form>
+                <label>
+                  <span>Select product</span>
+                  <select name="productId" data-product-offer-select required></select>
+                </label>
+                <label>
+                  <span>Offer label</span>
+                  <input type="text" name="offerText" maxlength="50" placeholder="Summer special" required />
+                </label>
+                <label>
+                  <span>Offer ends at (optional)</span>
+                  <input type="datetime-local" name="offerEndsAt" />
+                </label>
+                <div class="review-form-actions">
+                  <button class="button button-primary button-full" type="submit">Save Product Offer</button>
+                  <button class="button button-secondary button-full" type="button" data-scroll-product-form>
+                    Add New Product
+                  </button>
+                </div>
+              </form>
+            </article>
+
+            <article class="admin-form-card">
+              <p class="eyebrow">Products</p>
+              <h3>Add or update a product</h3>
+              <form class="admin-form" data-product-form>
+                <label>
+                  <span>Product title</span>
+                  <input type="text" name="title" maxlength="70" required />
+                </label>
+                <div class="form-row">
+                  <label>
+                    <span>Category</span>
+                    <input
+                      type="text"
+                      name="category"
+                      placeholder="Snacks, Beverages, Grocery"
+                      maxlength="40"
+                      required
+                    />
+                  </label>
+                  <label>
+                    <span>Price</span>
+                    <input type="text" name="price" placeholder="Rs 99" maxlength="20" required />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    <span>Variant / size</span>
+                    <input type="text" name="variant" placeholder="1kg, 500ml, 1 pack" maxlength="30" />
+                  </label>
+                  <label>
+                    <span>Stock status</span>
+                    <select name="stockStatus">
+                      <option value="in-stock">In stock</option>
+                      <option value="low">Low stock</option>
+                      <option value="out-of-stock">Out of stock</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  <span>Description</span>
+                  <textarea name="description" rows="3" maxlength="180"></textarea>
+                </label>
+                <div class="form-row">
+                  <label>
+                    <span>Offer text</span>
+                    <input type="text" name="offerText" maxlength="50" placeholder="10% off" />
+                  </label>
+                  <label>
+                    <span>Offer ends at</span>
+                    <input type="datetime-local" name="offerEndsAt" />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    <span>Pickup ready in minutes</span>
+                    <input type="number" name="pickupMinutes" min="5" max="240" value="20" />
+                  </label>
+                  <label>
+                    <span>Estimated delivery</span>
+                    <input type="text" name="estimatedDelivery" placeholder="20-30 min" maxlength="30" />
+                  </label>
+                </div>
+                <button class="button button-primary button-full" type="submit">
+                  Add Product
+                </button>
+              </form>
+            </article>
+
+            <article class="admin-form-card">
+              <p class="eyebrow">Delivery settings</p>
+              <h3>Home delivery, pickup, and fees</h3>
+              <form class="admin-form" data-delivery-settings-form>
+                <div class="form-row">
+                  <label>
+                    <span>Free delivery radius (km)</span>
+                    <input type="number" name="freeRadiusKm" min="0" step="0.1" value="2" required />
+                  </label>
+                  <label>
+                    <span>Paid delivery radius (km)</span>
+                    <input type="number" name="paidRadiusKm" min="0" step="0.1" value="5" required />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    <span>Maximum delivery radius (km)</span>
+                    <input type="number" name="maxRadiusKm" min="0" step="0.1" value="7" required />
+                  </label>
+                  <label>
+                    <span>Delivery charge after free radius</span>
+                    <input type="number" name="deliveryCharge" min="0" step="1" value="20" required />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    <span>Minimum order for delivery</span>
+                    <input type="number" name="minimumOrder" min="0" step="1" value="150" required />
+                  </label>
+                  <label>
+                    <span>Free delivery above</span>
+                    <input type="number" name="freeDeliveryAbove" min="0" step="1" value="500" required />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    <span>Platform fee</span>
+                    <input type="number" name="platformFee" min="0" step="1" value="5" required />
+                  </label>
+                  <label>
+                    <span>Packing fee</span>
+                    <input type="number" name="packingFee" min="0" step="1" value="10" required />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    <span>Delivery enabled</span>
+                    <select name="deliveryEnabled">
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Pickup enabled</span>
+                    <select name="pickupEnabled">
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    <span>UPI ID for pay now</span>
+                    <input type="text" name="upiId" placeholder="shopname@upi" maxlength="60" />
+                  </label>
+                  <label>
+                    <span>Pickup slot note</span>
+                    <input type="text" name="pickupSlotLabel" placeholder="Pickup in 20-30 min" maxlength="40" />
+                  </label>
+                </div>
+                <button class="button button-primary button-full" type="submit">Save delivery settings</button>
+              </form>
+            </article>
+          </section>
+
+          <aside>
+            <article class="admin-form-card">
+              <p class="eyebrow">Setup</p>
+              <h3>Admin checklist</h3>
+              <ul class="highlights">
+                <li>Publish the main offer for the homepage</li>
+                <li>Add products to update the shopping catalog</li>
+                <li>Save delivery settings before taking live orders</li>
+                <li>Update order status so customers can track progress</li>
+              </ul>
+            </article>
+            <article class="admin-form-card">
+              <p class="eyebrow">Recent content</p>
+              <h3>Latest offers and products</h3>
+              <div class="reviews-grid" data-admin-feed></div>
+            </article>
+            <article class="admin-form-card">
+              <p class="eyebrow">Order management</p>
+              <h3>Incoming customer orders</h3>
+              <div class="reviews-grid" data-admin-orders></div>
+            </article>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" data-modal hidden>
+      <section class="auth-modal" aria-labelledby="auth-title" aria-modal="true" role="dialog">
+        <button class="modal-close" data-close-auth="true" aria-label="Close sign in dialog">
+          &times;
+        </button>
+        <p class="eyebrow">Account access</p>
+        <h2 id="auth-title">Sign in or create your account</h2>
+        <p class="muted">Use Google or email to continue.</p>
+        <div class="auth-actions">
+          <button class="button button-google" type="button" data-google-signin>
+            Continue with Google
+          </button>
+        </div>
+        <div class="auth-divider"><span>or</span></div>
+        <div class="auth-mode-switch">
+          <button class="auth-mode-button is-active" type="button" data-auth-mode="signin">
+            Sign in
+          </button>
+          <button class="auth-mode-button" type="button" data-auth-mode="signup">
+            Sign up
+          </button>
+        </div>
+        <form class="auth-form" data-auth-form>
+          <label>
+            <span>Name</span>
+            <input type="text" name="displayName" placeholder="Your name" data-signup-only />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" minlength="6" required />
+          </label>
+          <button class="button button-primary button-full" type="submit" data-auth-submit>
+            Sign in
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" data-toast hidden></div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

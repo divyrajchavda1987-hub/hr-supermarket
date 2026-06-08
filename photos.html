@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photos | H.R Super Market</title>
+    <meta
+      name="description"
+      content="Browse all H.R Super Market photos and upload new ones after signing in."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="photos">
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html" aria-label="H.R Super Market home">
+          <img class="brand-logo" src="./logo.svg" alt="HR logo" />
+          <span>
+            <strong>H.R Super Market</strong>
+            <small>Surendranagar, Gujarat</small>
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="./index.html">Home</a>
+          <a href="./products.html">Products</a>
+          <a href="./photos.html">Photos</a>
+          <a href="./admin.html">Admin</a>
+        </nav>
+        <div class="topbar-actions">
+          <button class="button button-primary" type="button" data-auth-toggle>Sign in</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="page-hero">
+          <p class="eyebrow">Photo gallery</p>
+          <h1>All shared store photos in one place.</h1>
+          <p class="muted">
+            The homepage shows only three cards. This page shows the full gallery and lets
+            signed-in users upload more images.
+          </p>
+        </section>
+
+        <section class="page-two-column">
+          <section class="page-panel">
+            <div class="photo-grid" data-photo-gallery></div>
+            <div class="empty-state" data-photos-empty hidden>
+              <h3>No photos yet</h3>
+              <p class="muted">Upload the first store photo after connecting Firebase.</p>
+            </div>
+          </section>
+
+          <aside class="admin-form-card">
+            <p class="eyebrow">Upload a photo</p>
+            <h3>Add a new image for everyone to see</h3>
+            <p class="muted" data-photo-upload-helper>
+              Sign in first, then choose a photo file and a short caption.
+            </p>
+
+            <form class="upload-form" data-photo-upload-form>
+              <label>
+                <span>Title</span>
+                <input type="text" name="title" maxlength="60" required />
+              </label>
+              <label>
+                <span>Caption</span>
+                <textarea name="caption" rows="3" maxlength="160"></textarea>
+              </label>
+              <label>
+                <span>Photo file</span>
+                <input type="file" name="photo" accept="image/*" required />
+              </label>
+              <button class="button button-primary button-full" type="submit">
+                Upload photo
+              </button>
+            </form>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" data-modal hidden>
+      <section class="auth-modal" aria-labelledby="auth-title" aria-modal="true" role="dialog">
+        <button class="modal-close" data-close-auth="true" aria-label="Close sign in dialog">
+          &times;
+        </button>
+        <p class="eyebrow">Account access</p>
+        <h2 id="auth-title">Sign in or create your account</h2>
+        <p class="muted">Use Google or email to continue.</p>
+        <div class="auth-actions">
+          <button class="button button-google" type="button" data-google-signin>
+            Continue with Google
+          </button>
+        </div>
+        <div class="auth-divider"><span>or</span></div>
+        <div class="auth-mode-switch">
+          <button class="auth-mode-button is-active" type="button" data-auth-mode="signin">
+            Sign in
+          </button>
+          <button class="auth-mode-button" type="button" data-auth-mode="signup">
+            Sign up
+          </button>
+        </div>
+        <form class="auth-form" data-auth-form>
+          <label>
+            <span>Name</span>
+            <input type="text" name="displayName" placeholder="Your name" data-signup-only />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" minlength="6" required />
+          </label>
+          <button class="button button-primary button-full" type="submit" data-auth-submit>
+            Sign in
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" data-toast hidden></div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
