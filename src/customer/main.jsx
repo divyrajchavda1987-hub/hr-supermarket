@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { createRoot } from "react-dom/client";
 
 // ─── CONSTANTS ───────────────────────────────────────────────
 const SHOP_INFO = {
@@ -976,7 +977,7 @@ const DevDashboard = ({ orders, onClose, mobile }) => {
 // ═══════════════════════════════════════════════════════════════
 //  MAIN APP
 // ═══════════════════════════════════════════════════════════════
-export default function App() {
+function HRSupermarket() {
   const [mobile, setMobile] = useState(window.innerWidth < 768);
   useEffect(() => {
     const h = () => setMobile(window.innerWidth < 768);
@@ -1363,3 +1364,5 @@ export default function App() {
     </div>
   );
 }
+
+export default HRSupermarket;
